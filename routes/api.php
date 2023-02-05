@@ -19,6 +19,12 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware(['auth:api', 'user-access:admin'])->get('/admin/user', function (Request $request) {
+    return "This is admin router";
+});
+Route::middleware(['auth:api', 'user-access:manager'])->get('/manager/user', function (Request $request) {
+    return "This is manager router";
+});
 
 route::get('/', function(){
     return "Welcome to Auth by laravel";
