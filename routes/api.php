@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,9 @@ route::get('/', function(){
 });
 
 route::post("/reg/user", [UserController::class, 'regUser']);
+
+route::post('/create/visitor', [VisitorController::class, 'addNewVisitor']);
+
+Route::middleware(['auth:visitor-api', ])->get('/visitor', function (Request $request) {
+    return $request->user();
+});
